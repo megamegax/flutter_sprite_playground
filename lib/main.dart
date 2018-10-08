@@ -1,4 +1,5 @@
 import 'package:flame/flame.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_sprite_demo/game.dart';
@@ -19,10 +20,8 @@ main() async {
   ]);
 
   var game = new MyGame();
-//  Flame.util.addGestureRecognizer(new TapGestureRecognizer()
-//    ..onTapDown = (TapDownDetails evt) => game.input(null));
-//  Flame.util.addGestureRecognizer(new ImmediateMultiDragGestureRecognizer()
-//    ..onStart = (Offset event) => game.input(event));
 
   runApp(game.widget);
+  Flame.util.addGestureRecognizer(new ImmediateMultiDragGestureRecognizer()
+    ..onStart = (Offset event) => game.input(event));
 }

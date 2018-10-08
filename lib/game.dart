@@ -5,6 +5,7 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' show Colors, TextPainter;
+import 'package:flutter_sprite_demo/DragHandler.dart';
 import 'package:flutter_sprite_demo/sprite/animated/dog.dart';
 import 'package:flutter_sprite_demo/sprite/animated/fridge.dart';
 import 'package:flutter_sprite_demo/sprite/animated/pile.dart';
@@ -45,19 +46,41 @@ class MyGame extends BaseGame {
     super.update(t);
   }
 
-  void input(Offset event) {
-    components.forEach((component) {
-      if (!(component is FoodSprite)) {
-        return;
+  Drag input(Offset event) {
+    for (var component in components) {
+      if ((component is FoodSprite)) {
+        if (isInTarget(event, component)) {
+          component.isTouched = true;
+          Drag drag = new DragHandler(_handleDragUpdate, _handleDragEnd);
+          return drag;
+        }
       }
-//      Crate crate = component as Crate;
-//      bool remove = crate.toRect().contains(position);
-//      if (remove) {
-//        crate.explode = true;
-//        add(new Explosion(crate));
-//        Flame.audio.play('explosion.mp3');
-//        points += 10;
-//      }
+    }
+    return null;
+  }
+
+  bool isInTarget(Offset event, FoodSprite target) =>
+      event.dx >= target.x &&
+      event.dx <= target.x + target.width &&
+      event.dy >= target.y &&
+      event.dy <= target.y + target.height;
+
+  void _handleDragUpdate(DragUpdateDetails details) {
+    components.forEach((component) {
+      if (component is FoodSprite) {
+        if (component.isTouched) {
+          component.y = details.globalPosition.dy;
+          component.x = details.globalPosition.dx;
+        }
+      }
+    });
+  }
+
+  void _handleDragEnd(DragEndDetails details) {
+    components.forEach((component) {
+      if (component is FoodSprite) {
+        component.isTouched = false;
+      }
     });
   }
 }
