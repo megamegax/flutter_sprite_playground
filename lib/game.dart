@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flame/flame.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_sprite_demo/sprite/animated/dog.dart';
 import 'package:flutter_sprite_demo/sprite/animated/fridge.dart';
 import 'package:flutter_sprite_demo/sprite/animated/pile.dart';
 import 'package:flutter_sprite_demo/sprite/animated/trash_bin.dart';
+import 'package:flutter_sprite_demo/sprite/food_sprite.dart';
 
 const SPEED = 250.0;
 
@@ -15,6 +17,7 @@ var points = 0;
 
 class MyGame extends BaseGame {
   double creationTimer = 0.0;
+  Random rnd = new Random();
 
   @override
   void render(Canvas canvas) {
@@ -34,7 +37,27 @@ class MyGame extends BaseGame {
       add(new Bin(190.0, 550.0));
       add(new Pile(100.0, 550.0));
     }
+    if (creationTimer >= 1) {
+      creationTimer = 0.0;
+      add(new FoodSprite(rnd.nextInt(400).toDouble(), 0.0, 'sajt.png'));
+    }
     creationTimer += t;
     super.update(t);
+  }
+
+  void input(Offset event) {
+    components.forEach((component) {
+      if (!(component is FoodSprite)) {
+        return;
+      }
+//      Crate crate = component as Crate;
+//      bool remove = crate.toRect().contains(position);
+//      if (remove) {
+//        crate.explode = true;
+//        add(new Explosion(crate));
+//        Flame.audio.play('explosion.mp3');
+//        points += 10;
+//      }
+    });
   }
 }

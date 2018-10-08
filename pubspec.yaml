@@ -42,6 +42,12 @@ flutter:
     - assets/images/komposzt.png
     - assets/images/kuka.png
     - assets/images/kutya.png
+    - assets/images/zold_alma.png
+    - assets/images/alma.png
+    - assets/images/hal.png
+    - assets/images/grillcsirke.png
+    - assets/images/sajt.png
+    - assets/images/citrom.png
   fonts:
     - family: Halo
       fonts:
