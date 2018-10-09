@@ -6,6 +6,7 @@ import 'package:flutter_sprite_demo/game.dart';
 
 main() async {
   Flame.audio.disableLog();
+  Flame.audio.load("megaman.mp3");
   Flame.images.loadAll([
     'kutya.png',
     'kuka.png',
@@ -24,4 +25,5 @@ main() async {
   runApp(game.widget);
   Flame.util.addGestureRecognizer(new ImmediateMultiDragGestureRecognizer()
     ..onStart = (Offset event) => game.input(event));
+  Flame.audio.play("megaman.mp3", volume: 1.0);
 }

@@ -48,6 +48,7 @@ flutter:
     - assets/images/grillcsirke.png
     - assets/images/sajt.png
     - assets/images/citrom.png
+    - assets/audio/megaman.mp3
   fonts:
     - family: Halo
       fonts:

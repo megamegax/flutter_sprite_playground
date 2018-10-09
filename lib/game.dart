@@ -40,7 +40,7 @@ class MyGame extends BaseGame {
     }
     if (creationTimer >= 1) {
       creationTimer = 0.0;
-      add(new FoodSprite(rnd.nextInt(400).toDouble(), 0.0, 'sajt.png'));
+      add(new FoodSprite(rnd.nextInt(400).toDouble(), 0.0, 'grillcsirke.png'));
     }
     creationTimer += t;
     super.update(t);
